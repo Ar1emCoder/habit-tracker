@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Habit Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+    <h1>📊 Habit Tracker</h1>
+
+    <!-- Статистика -->
+    <div class="stats" id="stats">
+        <div class="stat-item">
+            <span class="stat-value">{{ stats.total_habits }}</span>
+            <br>Всего привычек
+        </div>
+        <div class="stat-item">
+            <span class="stat-value">{{ stats.total_streak }}</span>
+            <br>Всего дней
+        </div>
+        {% if stats.best_habit %}
+        <div class="stat-item">
+            <span class="stat-value">{{ stats.best_habit }}</span>
+            <br>🔥 {{ stats.best_streak }} дней
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Форма добавления -->
+    <h2>➕ Новая привычка</h2>
+    <form action="/add" method="post">
+        <input type="text" name="name" placeholder="Введите название привычки..." required>
+        <button type="submit">Добавить</button>
+    </form>
+
+    <!-- Список привычек -->
+    <h2>📋 Мои привычки</h2>
+    {% if habits %}
+        <ul>
+        {% for habit in habits %}
+            <li>
+                <div class="habit-info">
+                    <div class="habit-name">{{ habit.name }}</div>
+                    <div class="habit-streak">🔥 {{ habit.streak }} дней</div>
+                    <div class="habit-date">Последнее: {{ habit.last_completed }}</div>
+                </div>
+                <div class="actions">
+                    <form action="/complete/{{ habit.id }}" method="post">
+                        <button type="submit" class="complete-btn">✅</button>
+                    </form>
+                    <form action="/delete/{{ habit.id }}" method="post" onsubmit="return confirm('Удалить привычку?')">
+                        <button type="submit" class="delete-btn">❌</button>
+                    </form>
+                </div>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <div class="empty-state">
+            ✨ У тебя пока нет привычек.<br>
+            Добавь первую, чтобы начать отслеживать прогресс!
+        </div>
+    {% endif %}
+        </div>
+</body>
+</html>
