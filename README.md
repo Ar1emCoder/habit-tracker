@@ -2,8 +2,7 @@
 
 A web-based application for tracking daily habits and building consistency.
 
-🔗 **Live Demo:** [https://твоя-ссылка-на-vercel.vercel.app](https://твоя-ссылка-на-vercel.vercel.app) *(ЗАМЕНИ ЭТУ ССЫЛКУ НА СВОЮ РЕАЛЬНУЮ!)*
-
+🔗 **Live Demo:** https://habit-tracker-theta-inky.vercel.app/
 ## 🛠 Tech Stack
 - Python 3.10+
 - Flask
